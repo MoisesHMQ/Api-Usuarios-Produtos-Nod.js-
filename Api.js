@@ -23,17 +23,16 @@ app.post('/login', (request, response) => {
 })
 
 app.post('/cadastro', (request, response) => {
-    for (var usuario in usuarios) {
-        if(usuario.email == request.body.email){
-             return response.send("Usuario ja cadastrado")
-        }
-    }
+    const validarEmail = usuarios.find((user) => user.email == request.body.email)
+        if (validarEmail){
+            return response.send("Status: Usuario Já Cadastrado.")}
+        
         usuarios.push({
         id: uuid.v4(),
         email: request.body.email,
         senha: request.body.senha
     })
-    return response.send(request.body)
+    return response.send("Usuario criado com sucesso.")
 })
 
 
@@ -51,17 +50,16 @@ app.get('/listar/usuarios', (request, response) => {
 
 const produtos = [];
 
-app.post('/cadastro/produto', (request, response) => {
-    for (var produto in produtos) {
-        if(produto.camisa == request.body.camisa){
-             return response.send("Status: Produto Já cadastrado")
-        }
-    }
-        produtos.push({
+app.post('/cadastro/produtos', (request, response) => {
+    const validarProdutos = usuarios.find((user) => user.produto == request.body.produto)
+        if (validarProdutos){
+            return response.send("Status: Produto Já Cadastrado.")}
+        
+        usuarios.push({
         id: uuid.v4(),
-        camisa: request.body.camisa
+        produto: request.body.produto    
     })
-    return response.send(request.body)
+    return response.send("Produto cadastrado.")
 })
 
 app.get('/listar/produtos', (request, response) => {
