@@ -9,7 +9,7 @@ const usuarios = [];
 
    
 app.post('/login', (request, response) => {
-    const login = medicos.find((user) => user.email == request.body.email && user.senha == request.body.senha)
+    const login = usuarios.find((user) => user.email == request.body.email && user.senha == request.body.senha)
         if(login){
             return response.send("Status: Logado, seja bem vindo")
 
