@@ -9,18 +9,14 @@ const usuarios = [];
 
    
 app.post('/login', (request, response) => {
-    console.log(request.body);
+    const login = medicos.find((user) => user.email == request.body.email && user.senha == request.body.senha)
+        if(login){
+            return response.send("Status: Logado, seja bem vindo")
 
-    if (request.body.email == "moises"){ 
-        if (request.body.senha == "1234"){ 
-            return response.send("Logado, seja bem vindo")
-        } else{
-            return response.send("Senha incorreta!");
+        }else{
+            return response.send("Erro: Email ou Senha incorretos.");
         }
-    } else  {
-        return response.send("erro: usuario não existe")
-    }
-})
+    })
 
 app.post('/cadastro', (request, response) => {
     const validarEmail = usuarios.find((user) => user.email == request.body.email)
@@ -73,8 +69,6 @@ app.post('/excluir/produtos', (request,response) => {
         console.log("Produto excluido...")
     return response.send(delete_id)
 })
-
-
 
 
 app.listen(3000, () => {
